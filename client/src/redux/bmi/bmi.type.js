@@ -1,3 +1,4 @@
-export const PRODUCT_LOADING = "product_loading";
-export const PRODUCT_SUCCESS = "product_success";
-export const PRODUCT_ERROR = "product_error";
+export const BMI_LOADING = "bmi_loading";
+export const BMI_VALUE_SUCCESS = "bmi_value_success";
+export const BMI_HISTORY_SUCCESS = "bmi_history_success";
+export const BMI_ERROR = "bmi_error";

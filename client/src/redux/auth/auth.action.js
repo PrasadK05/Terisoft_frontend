@@ -2,6 +2,7 @@ import {
   AUTH_LOG_IN_ERROR,
   AUTH_LOG_IN_LOADING,
   AUTH_LOG_IN_SUCCESS,
+  AUTH_LOG_OUT_SUCCESS,
 } from "./auth.type";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -22,6 +23,12 @@ export const authLoginFail = () => {
 export const authLoginLoad = () => {
   return {
     type: AUTH_LOG_IN_LOADING,
+  };
+};
+
+export const authLogout = () => {
+  return {
+    type: AUTH_LOG_OUT_SUCCESS,
   };
 };
 
@@ -49,9 +56,33 @@ export const loginProcess = (data) => async (dispatch) => {
       "https://terisoft.onrender.com/user/login",
       data
     );
+
     if (res.data.status) {
       dispatch(authLoginSucc(res.data));
       Cookies.set("token", res.data.token);
+      Cookies.set("name", res.data.name);
+      return true;
+    } else {
+      dispatch(authLoginFail());
+      return false;
+    }
+  } catch (error) {
+    dispatch(authLoginFail());
+    return false;
+  }
+};
+
+export const logoutProcess = (data) => async (dispatch) => {
+  dispatch(authLoginLoad());
+  
+  try {
+    let res = await axios.post(
+      "https://terisoft.onrender.com/user/logout",
+      data
+    );
+    console.log(res.data);
+    if (res.data.status) {
+      dispatch(authLogout);      
       return true;
     } else {
       dispatch(authLoginFail());
