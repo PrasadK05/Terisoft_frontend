@@ -38,15 +38,44 @@ export const getBMIValue = (data, token) => async (dispatch) => {
   };
   dispatch(bmiLoad());
   try {
-    let res = await axios.post("https://terisoft.onrender.com/bmi/calculateBMI", data, config);
-    console.log(res.data);
+    let res = await axios.post(
+      "https://terisoft.onrender.com/bmi/calculateBMI",
+      data,
+      config
+    );
     if (res.data.status) {
       dispatch(bmivalSucc(res.data));
       return true;
     } else {
       dispatch(bmiFail());
-      if(res.data.message==="jwt expired"){
-        return res.data.message
+      if (res.data.message === "jwt expired") {
+        return res.data.message;
+      }
+      return false;
+    }
+  } catch (error) {
+    dispatch(bmiFail());
+    return false;
+  }
+};
+
+export const getBMIHistory = (token) => async (dispatch) => {
+  let config = {
+    headers: { token },
+  };
+  dispatch(bmiLoad());
+  try {
+    let res = await axios.get(
+      "https://terisoft.onrender.com/bmi/getCalculationHistory",
+      config
+    );    
+    if (res.data.status) {
+      dispatch(bmihistSucc(res.data));
+      return true;
+    } else {
+      dispatch(bmiFail());
+      if (res.data.message === "jwt expired") {
+        return res.data.message;
       }
       return false;
     }
