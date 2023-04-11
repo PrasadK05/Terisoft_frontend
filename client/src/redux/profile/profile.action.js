@@ -38,7 +38,7 @@ export const getProfile = (token) => async (dispatch) => {
       "https://terisoft.onrender.com/profile/getProfile",
       config
     );
-    console.log(res.data);
+
     if (res.data.status) {
       dispatch(profileSucc(res.data.result));
       return true;

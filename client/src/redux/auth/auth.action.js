@@ -86,8 +86,7 @@ export const logoutProcess = (data) => async (dispatch) => {
     let res = await axios.post(
       "https://terisoft.onrender.com/user/logout",
       data
-    );
-    console.log(res.data);
+    );    
     if (res.data.status) {
       dispatch(authLogout());
       return true;
