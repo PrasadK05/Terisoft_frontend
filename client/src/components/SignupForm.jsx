@@ -64,7 +64,7 @@ export default function SignupForm() {
     //signup function
     signupProcess(data)
       .then((res) => {
-        if (res.status) {
+        if (res) {
           toast({
             title: "Account created successfully.",
             status: "success",

@@ -67,14 +67,14 @@ export const loginProcess = (data) => async (dispatch) => {
       dispatch(authLoginSucc(res.data));
       Cookies.set("token", res.data.token);
       Cookies.set("name", res.data.name);
-      return res.data;
+      return true;
     } else {
       dispatch(authLoginFail());
-      return res.data;
+      return false;
     }
   } catch (error) {
     dispatch(authLoginFail());
-    return { status: false, messege: error };
+    return false;
   }
 };
 
