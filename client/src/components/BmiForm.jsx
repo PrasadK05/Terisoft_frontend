@@ -75,17 +75,17 @@ export default function BmiForm() {
             <Input
               type="number"
               name="weight"
-              placeholder="Enter Your weight in kg"
+              placeholder="Enter your weight in kg"
               value={weight}
               onChange={handleChange}
             />
           </FormControl>
           <FormControl>
-            <FormLabel>height in meter (m)</FormLabel>
+            <FormLabel>height in feet</FormLabel>
             <Input
               type="number"
               name="height"
-              placeholder="Enter Your weight in meter"
+              placeholder="Enter your height in feet"
               value={height}
               onChange={handleChange}
             />
