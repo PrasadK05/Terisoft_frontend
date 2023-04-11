@@ -18,6 +18,7 @@ let init = {
   height: "",
 };
 
+// Get BMI Form
 export default function BmiForm() {
   const [Mesurement, setMesurement] = useState(init);
   const { loading } = useSelector((store) => store.bmi);
@@ -30,6 +31,7 @@ export default function BmiForm() {
     setMesurement({ ...Mesurement, [name]: value });
   };
 
+  // Dispatching async action to bmiReducer
   let handleSubmit = (e) => {
     e.preventDefault();
 
@@ -56,7 +58,10 @@ export default function BmiForm() {
     <Box
       w={{ base: "90%", sm: "90%", md: "70%", lg: "35%" }}
       m="auto"
-      border={"1px solid black"}
+      boxShadow={
+        "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+      }
+      borderRadius={"10px"}
       mt="30px"
       p="20px"
     >

@@ -4,12 +4,13 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { authLoginSucc } from "../redux/auth/auth.action";
 
+// Route protection
 export default function PrivateRoutes({ children }) {
   let token = Cookies.get("token");
   let name = Cookies.get("name");
   const dispatch = useDispatch();
 
-  if (token) {    
+  if (token) {
     dispatch(authLoginSucc({ token, name }));
     return children;
   }

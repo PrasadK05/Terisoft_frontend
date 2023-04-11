@@ -6,6 +6,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import History from "../pages/History";
 import Profile from "../pages/Profile";
 
+// Managing all available routes
 export default function AllRoutes() {
   return (
     <Routes>

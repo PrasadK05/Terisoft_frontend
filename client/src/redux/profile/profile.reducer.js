@@ -4,12 +4,13 @@ import {
   PROFILE_SUCCESS,
 } from "./profile.type";
 
-export const authInitalState = {
+const authInitalState = {
   loading: false,
   user: {},
   error: false,
 };
 
+// profile reducer
 export const profileReducer = (state = authInitalState, action) => {
   switch (action.type) {
     case PROFILE_SUCCESS: {

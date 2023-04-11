@@ -17,6 +17,7 @@ let init = {
   password: "",
 };
 
+// Login Function
 export default function LoginForm() {
   const { loading } = useSelector((store) => store.auth);
   const [log, setLog] = useState(init);
@@ -30,6 +31,7 @@ export default function LoginForm() {
     setLog({ ...log, [name]: value });
   };
 
+  // Handling login flow and form validation
   let handleSubmit = (e) => {
     e.preventDefault();
     let reg =
@@ -38,6 +40,8 @@ export default function LoginForm() {
       alert("provide correct email");
       return;
     }
+
+    // dispatching async action to auth reducer
     dispatch(loginProcess(log))
       .then((res) => {
         if (res) {
@@ -72,7 +76,10 @@ export default function LoginForm() {
     <Box
       w={{ base: "90%", sm: "90%", md: "70%", lg: "35%" }}
       m="auto"
-      border={"1px solid black"}
+      boxShadow={
+        "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+      }
+      borderRadius={"10px"}
       mt="30px"
       p="20px"
     >

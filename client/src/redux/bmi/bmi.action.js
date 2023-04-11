@@ -6,6 +6,7 @@ import {
 } from "./bmi.type";
 import axios from "axios";
 
+// action for bmi value
 export const bmivalSucc = (payload) => {
   return {
     type: BMI_VALUE_SUCCESS,
@@ -13,6 +14,7 @@ export const bmivalSucc = (payload) => {
   };
 };
 
+// action for bmi history
 export const bmihistSucc = (payload) => {
   return {
     type: BMI_HISTORY_SUCCESS,
@@ -20,18 +22,21 @@ export const bmihistSucc = (payload) => {
   };
 };
 
+// action for bmi value or bmi history failure
 export const bmiFail = () => {
   return {
     type: BMI_ERROR,
   };
 };
 
+// action for bmi value or bmi history loading
 export const bmiLoad = () => {
   return {
     type: BMI_LOADING,
   };
 };
 
+// async function for get bmi value
 export const getBMIValue = (data, token) => async (dispatch) => {
   let config = {
     headers: { token },
@@ -59,6 +64,7 @@ export const getBMIValue = (data, token) => async (dispatch) => {
   }
 };
 
+// async function for get bmi history
 export const getBMIHistory = (token) => async (dispatch) => {
   let config = {
     headers: { token },
@@ -68,7 +74,7 @@ export const getBMIHistory = (token) => async (dispatch) => {
     let res = await axios.get(
       "https://terisoft.onrender.com/bmi/getCalculationHistory",
       config
-    );    
+    );
     if (res.data.status) {
       dispatch(bmihistSucc(res.data));
       return true;

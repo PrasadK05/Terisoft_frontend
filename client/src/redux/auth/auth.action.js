@@ -7,6 +7,7 @@ import {
 import Cookies from "js-cookie";
 import axios from "axios";
 
+// login success action
 export const authLoginSucc = (payload) => {
   return {
     type: AUTH_LOG_IN_SUCCESS,
@@ -14,24 +15,28 @@ export const authLoginSucc = (payload) => {
   };
 };
 
+// login fail action
 export const authLoginFail = () => {
   return {
     type: AUTH_LOG_IN_ERROR,
   };
 };
 
+// login loading action
 export const authLoginLoad = () => {
   return {
     type: AUTH_LOG_IN_LOADING,
   };
 };
 
+// logout success action
 export const authLogout = () => {
   return {
     type: AUTH_LOG_OUT_SUCCESS,
   };
 };
 
+// async signup function
 export const signupProcess = async (data) => {
   try {
     let res = await axios.post(
@@ -49,6 +54,7 @@ export const signupProcess = async (data) => {
   }
 };
 
+// async login function
 export const loginProcess = (data) => async (dispatch) => {
   dispatch(authLoginLoad());
   try {
@@ -61,20 +67,21 @@ export const loginProcess = (data) => async (dispatch) => {
       dispatch(authLoginSucc(res.data));
       Cookies.set("token", res.data.token);
       Cookies.set("name", res.data.name);
-      return true;
+      return res.data;
     } else {
       dispatch(authLoginFail());
-      return false;
+      return res.data;
     }
   } catch (error) {
     dispatch(authLoginFail());
-    return false;
+    return { status: false, messege: error };
   }
 };
 
+// async logout function
 export const logoutProcess = (data) => async (dispatch) => {
   dispatch(authLoginLoad());
-  
+
   try {
     let res = await axios.post(
       "https://terisoft.onrender.com/user/logout",
@@ -82,7 +89,7 @@ export const logoutProcess = (data) => async (dispatch) => {
     );
     console.log(res.data);
     if (res.data.status) {
-      dispatch(authLogout);      
+      dispatch(authLogout());
       return true;
     } else {
       dispatch(authLoginFail());

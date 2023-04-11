@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutProcess } from "../redux/auth/auth.action";
 
+// Navbar Function
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
@@ -28,6 +29,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const toast = useToast();
 
+  // handle routing on the basis of authentication
   let handleLog = () => {
     if (data.isAuthenticated) {
       dispatch(logoutProcess({ token: data.token }))
@@ -63,7 +65,14 @@ export default function Navbar() {
       navigate("/login");
     }
   };
-
+  // handle routing on the basis of authentication
+  let handleProfile = () => {
+    if (data.isAuthenticated) {
+      navigate("/profile");
+    } else {
+      navigate("/register");
+    }
+  };
   return (
     <Box
       w={"100%"}
@@ -71,19 +80,22 @@ export default function Navbar() {
       display={"flex"}
       justifyContent={"space-between"}
       alignItems={"center"}
-      border={"1px solid red"}
       px="30px"
+      bg="#FFFFFF"
+      boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"}
     >
       {/* For Desktop */}
       <HStack
         gap="20px"
         display={{ base: "none", sm: "none", md: "none", lg: "flex" }}
       >
-        <Text fontSize={"20px"} fontWeight={"bold"}>
-          BMI Calculator
-        </Text>
+        <Link to="/">
+          <Text fontSize={"20px"} fontWeight={"bold"}>
+            BMI Calculator
+          </Text>
+        </Link>
         <Link to={"/history"}>
-          <Button color="#FFFFFF" bg="#4299e1">
+          <Button color="#FFFFFF" bg="#4299e1" display={data.isAuthenticated?"block":"none"}>
             Previous BMI's
           </Button>
         </Link>
@@ -95,7 +107,7 @@ export default function Navbar() {
         <Button color="#FFFFFF" bg="#4299e1" onClick={handleLog}>
           {data.isAuthenticated ? "Logout" : "Login"}
         </Button>
-        <Button color="#FFFFFF" bg="#ed64a6">
+        <Button color="#FFFFFF" bg="#ed64a6" onClick={handleProfile}>
           {data.isAuthenticated ? data.name : "Register"}
         </Button>
       </HStack>
@@ -130,13 +142,13 @@ export default function Navbar() {
 
           <DrawerBody>
             <VStack>
-              <Button color="#FFFFFF" bg="#4299e1">
+              <Button color="#FFFFFF" bg="#4299e1" display={data.isAuthenticated?"block":"none"}>
                 Previous BMI's
               </Button>
               <Button color="#FFFFFF" bg="#4299e1" onClick={handleLog}>
                 {data.isAuthenticated ? "Logout" : "Login"}
               </Button>
-              <Button color="#FFFFFF" bg="#ed64a6">
+              <Button color="#FFFFFF" bg="#ed64a6" onClick={handleProfile}>
                 {data.isAuthenticated ? data.name : "Register"}
               </Button>
             </VStack>
@@ -146,3 +158,4 @@ export default function Navbar() {
     </Box>
   );
 }
+

@@ -5,7 +5,7 @@ import {
   AUTH_LOG_OUT_SUCCESS,
 } from "./auth.type";
 
-export const authInitalState = {
+const authInitalState = {
   loading: false,
   data: {
     token: "",
@@ -15,6 +15,7 @@ export const authInitalState = {
   error: false,
 };
 
+// Auth Reducer
 export const authReducer = (state = authInitalState, action) => {
   switch (action.type) {
     case AUTH_LOG_IN_SUCCESS: {

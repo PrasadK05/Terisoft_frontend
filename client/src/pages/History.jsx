@@ -34,7 +34,6 @@ export default function History() {
     <Box
       w={{ base: "90%", sm: "90%", md: "90%", lg: "90%" }}
       m="auto"
-      border={"1px solid black"}
       mt="20px"
       p="20px"
     >
@@ -63,6 +62,7 @@ export default function History() {
       </Box>
       <Box
         w="100%"
+        h="70vh"
         display={loading ? "flex" : "none"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -73,7 +73,17 @@ export default function History() {
           emptyColor="gray.200"
           color="blue.500"
           size="xl"
-        />        
+        />
+      </Box>
+
+      <Box
+        w="100%"
+        h="70vh"
+        display={bmi_history.length === 0 ? "flex" : "none"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Text fontSize={"30px"}> ...No Past Data Available 😓</Text>
       </Box>
     </Box>
   );

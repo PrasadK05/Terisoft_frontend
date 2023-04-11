@@ -5,13 +5,14 @@ import {
   BMI_VALUE_SUCCESS,
 } from "./bmi.type";
 
-export const bmiInitalState = {
+const bmiInitalState = {
   loading: false,
   bmi_history: [],
   error: false,
   bmi_value: "",
 };
 
+// bmi reducer
 export const bmiReducer = (state = bmiInitalState, action) => {
   switch (action.type) {
     case BMI_VALUE_SUCCESS: {

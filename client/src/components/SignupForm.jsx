@@ -17,6 +17,7 @@ let init = {
   password: "",
 };
 
+// Signup Form
 export default function SignupForm() {
   const [data, setData] = useState(init);
   const [cp, setCP] = useState("");
@@ -34,41 +35,42 @@ export default function SignupForm() {
     setCP(e.target.value);
   };
 
+  // handling form validation and signup logic
   let handleSubmit = (e) => {
     e.preventDefault();
     setLoad(true);
     let reg =
       /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
     if (!reg.test(data.email)) {
-        toast({
-            title: "Provide correct email.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
+      toast({
+        title: "Provide correct email.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       setLoad(false);
       return;
     }
     if (data.password !== cp) {
-        toast({
-            title: "Password not matched.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
+      toast({
+        title: "Password not matched.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       setLoad(false);
       return;
     }
-
+    //signup function
     signupProcess(data)
       .then((res) => {
-        if (res) {
+        if (res.status) {
           toast({
             title: "Account created successfully.",
             status: "success",
             duration: 5000,
             isClosable: true,
-          });          
+          });
           navigate("/login");
         } else {
           toast({
@@ -84,7 +86,7 @@ export default function SignupForm() {
       })
       .catch((err) => {
         toast({
-          title: "Account creation unsuccessful.",
+          title: err,
           status: "error",
           duration: 5000,
           isClosable: true,
@@ -99,7 +101,10 @@ export default function SignupForm() {
     <Box
       w={{ base: "90%", sm: "90%", md: "70%", lg: "35%" }}
       m="auto"
-      border={"1px solid black"}
+      boxShadow={
+        "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+      }
+      borderRadius={"10px"}
       mt="30px"
       p="20px"
     >
